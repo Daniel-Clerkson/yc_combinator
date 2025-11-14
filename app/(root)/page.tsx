@@ -1,7 +1,7 @@
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupTypecard } from "@/components/StartupCard";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { STARTUP_QUERY } from "@/sanity/lib/queries";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { auth } from "@/auth";
 
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,7 @@ export default async function Home({
 
   const params = { search: query || null };
 
-  const { data: productList } = await sanityFetch({ query: STARTUP_QUERY, params });
+  const { data: productList } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
   return (
     <>

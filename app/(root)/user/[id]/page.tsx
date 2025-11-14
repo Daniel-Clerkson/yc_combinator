@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import USerStartups from "@/components/USerStartups";
 import { client } from "@/sanity/lib/client";
