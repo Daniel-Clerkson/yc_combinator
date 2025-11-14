@@ -23,7 +23,6 @@ const StartupCard = async({ product }: { product: StartupTypecard }) => {
     image,
   } = product;
 
-  console.log(product)
 
   const session = await auth()
 
