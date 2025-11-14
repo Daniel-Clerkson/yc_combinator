@@ -44,7 +44,7 @@ const StartupCard = async({ product }: { product: StartupTypecard }) => {
             <h2 className="text-26-semibold line-clamp-1">{title}</h2>
           </Link>
         </div>
-        <Link href={`/user/${author?._id}`}>
+        <Link href={`/user/${author?.id}`}>
           <Image
             src={author?.image}
             alt="img"
