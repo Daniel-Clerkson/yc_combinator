@@ -1,4 +1,3 @@
-export const clientComponent = true;
 import { formatDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import {
@@ -13,11 +12,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import markdownit from "markdown-it";
 import View from "@/components/View";
 import StartupCard, { StartupTypecard } from "@/components/StartupCard";
+
 const md = markdownit();
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const id = (await params).id;
-
+// Async component that fetches the startup data
+// This component is wrapped in Suspense, so it won't block the page render
+async function StartupContent({ id }: { id: string }) {
   const product = await client.fetch(STARTUP_BY_ID_QUERY, { id });
 
   const { select: editorPosts } = await client.fetch(PLAYLIST_BY_SLUG_QUERY, {
@@ -29,10 +29,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   }
 
   const parsedContent = md.render(product?.pitch || "");
+
   return (
     <>
-      {" "}
-      <Suspense fallback={<Skeleton className="view-skeleton" />}>
         <section className="pink_container !min-h-[230px]">
           <p className="tag">{formatDate(product?._createdAt)}</p>
 
@@ -98,9 +97,20 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
           <View id={id} />
         </section>
-      </Suspense>
-    </>
-  );
-};
+      </>
+    );
+  }
 
-export default page;
+  const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+    const id = (await params).id;
+
+    return (
+      <>
+        <Suspense fallback={<Skeleton className="view-skeleton" />}>
+          <StartupContent id={id} />
+        </Suspense>
+      </>
+    );
+  };
+
+  export default page;
