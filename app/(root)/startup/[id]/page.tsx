@@ -15,8 +15,7 @@ import StartupCard, { StartupTypecard } from "@/components/StartupCard";
 
 const md = markdownit();
 
-// Add this to make the route dynamic
-export const dynamic = 'force-dynamic';
+export const experimental_ppr = true;
 
 async function StartupContent({ id }: { id: string }) {
   const product = await client.fetch(STARTUP_BY_ID_QUERY, { id });

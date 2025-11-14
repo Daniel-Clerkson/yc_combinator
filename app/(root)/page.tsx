@@ -4,17 +4,19 @@ import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUP_QUERY } from "@/sanity/lib/queries";
 import { auth } from "@/auth";
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 export default async function Home({
   searchParams,
 }: {
-  // Next.js app router provides searchParams as a plain object
   searchParams?: Promise<{ query?: string }>;
 }) {
-  const query = (await searchParams).query;
+  const { query } = (await searchParams) || {};
 
   const session = await auth();
 
-  const params = {search :query || null};
+  const params = { search: query || null };
 
   const { data: productList } = await sanityFetch({ query: STARTUP_QUERY, params });
 
