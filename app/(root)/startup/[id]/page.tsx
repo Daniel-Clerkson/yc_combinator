@@ -43,7 +43,7 @@ async function StartupContent({ id }: { id: string }) {
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <div className="flex-between gap-5">
-            <Link href={`/user/${product.author?.id}`} className="flex gap-2 items-center mb-3">
+            <Link href={`/user/${product.author?._id}`} className="flex gap-2 items-center mb-3">
               <Image src={product.author.image} alt="avatar" width={64} height={64} className="rounded-full drop-shadow-lg" />
               <div>
                 <p className="text-20-medium">{product.author?.name}</p>
